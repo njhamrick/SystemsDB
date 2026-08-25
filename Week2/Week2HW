@@ -1,0 +1,27 @@
+--Query 1
+CREATE TABLE audiobooks(title varchar PRIMARY KEY, author varchar, length_minutes numeric, date_started date, date_ended date);
+
+--Query 2
+INSERT INTO audiobooks(title, author, length_minutes, date_started, date_ended)
+VALUES('Butcher & Blackbird','Brynne Weaver','523','2026-06-04','2026-06-07'),('Throne of Glass','Sarah J Maas','783','2026-06-13','2026-06-19'),
+('Blood of Hercules','Jasmine Mas','954','2026-06-27','2026-07-03'),('Fourth Wing','Rebecca Yarros','1322','2026-07-10','2026-07-21'),
+('Sentinel','Jennifer L Armentrout','609','2026-07-29','2026-08-03');
+
+--Query 3
+INSERT INTO audiobooks(title, author, length_minutes, date_started, date_ended)
+VALUES('Sentinel''Jennifer L Armentrout','609','2026-07-29','2026-08-03');
+
+ERROR:  INSERT has more target columns than expressions
+LINE 1: ...ooks(title, author, length_minutes, date_started, date_ended...
+                                                             ^ 
+SQL state: 42601
+Character: 69
+
+
+-- Quick Skim: Chapter 3: Working with Data Types and Constraints
+One new concept I noticed:
+Specific columns can be selected, if you only want to focus on first_name, last_name, and age you would use the 
+query: SELECT first_name, last_name, age FROM students;
+
+One question I have after skimming Chapter 3:
+What is the difference between % and _ when using LIKE?
