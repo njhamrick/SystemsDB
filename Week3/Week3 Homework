@@ -16,34 +16,34 @@
 --  ('Avatar: The Last Airbender', 'Kids TV', 2007, 'TV-Y7'),
 --  ('The Apothecary Diaries', 'Drama', 2023, 'TV-14');
 
--- Query 1
+-- Query 1: Display all information from the table
 -- -- -- SELECT *
 -- -- -- FROM tv_shows;
 
--- Query 2
+-- Query 2: Display only title, genre, and maturity ratings
 -- -- SELECT title, genre, maturity_rating
 -- -- FROM tv_shows;
 
--- Query 3
+-- Query 3: Display unique genre and maturity rating combinations
 -- SELECT DISTINCT genre, maturity_rating
 -- FROM tv_shows;
 
---Query 4
+--Query 4: Display title and maturity ratings for titles including "the" (not case sensitive)
 -- SELECT title, maturity_rating 
 -- FROM tv_shows
 -- WHERE title ILIKE 'the%';
 
---Query 5
+--Query 5: Display titles and release years for shows released between 2005 and 2020
 -- SELECT title, release_year
 -- FROM tv_shows
 -- WHERE release_year BETWEEN 2005 AND 2020;
 
---Query 6
+--Query 6: Display titles and release years sorted by release year
 -- SELECT title, release_year
 -- FROM tv_shows
 -- ORDER BY release_year;
 
--- Query 7
+-- Query 7: Display titles and maturity ratings for shows released in 2018 or earlier, sorted by maturity rating
 -- SELECT title, maturity_rating
 -- From tv_shows
 -- WHERE release_year <= '2018'
