@@ -1,0 +1,94 @@
+-- Nikki Hamrick CISW 217 - Week 5 Lab
+
+--PART 2
+-- CREATE TABLE products(
+-- id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+-- product_name varchar(100),
+-- quantity integer
+-- );
+
+-- INSERT INTO products (product_name, quantity)
+-- VALUES
+-- 	('Gaming Mouse', 10),
+-- 	('Mechanical Keyboard', 8),
+-- 	('Monitor', 5),
+-- 	('Headset', 12);
+
+-- SELECT *
+-- FROM products
+
+
+--PART 3
+-- ALTER TABLE products
+-- ADD COLUMN description text,
+-- ADD COLUMN price numeric(7,2),
+-- ADD COLUMN rating real,
+-- ADD COLUMN last_updated timestamp with time zone,
+-- ADD COLUMN in_stock boolean;
+
+-- SELECT *
+-- FROM products;
+
+
+--PART 4
+-- UPDATE products
+-- SET description = 'Wireless gaming mouse',
+-- 	price = 49.99,
+-- 	rating = 4.7,
+-- 	last_updated = now(),
+-- 	in_stock = TRUE
+-- WHERE product_name = 'Gaming Mouse';
+
+-- UPDATE products
+-- SET description = 'Gaming Keyboard',
+-- 	price = 53.99,
+-- 	rating = 4.3,
+-- 	last_updated = now(),
+-- 	in_stock = TRUE
+-- WHERE product_name = 'Mechanical Keyboard';
+
+-- UPDATE products
+-- SET description = 'Computer Monitor',
+-- 	price = 78.99,
+-- 	rating = 4.8,
+-- 	last_updated = now(),
+-- 	in_stock = FALSE
+-- WHERE product_name = 'Monitor';
+
+-- UPDATE products
+-- SET description = 'Gaming Headset',
+-- 	price = 54.99,
+-- 	rating = 4.2,
+-- 	last_updated = now(),
+-- 	in_stock = TRUE
+-- WHERE product_name = 'Headset';
+
+
+--PART 5
+-- UPDATE products
+-- SET price = 43.99
+-- WHERE product_name = 'Gaming Mouse';
+
+-- SELECT product_name, price
+-- FROM products;
+
+
+--PART 6
+-- SELECT *
+-- FROM products;
+
+-- SELECT product_name, price, rating
+-- FROM products;
+
+-- SELECT *
+-- FROM products
+-- WHERE price > 54;
+
+-- SELECT *
+-- FROM products
+-- WHERE in_stock = TRUE;
+
+-- SELECT *
+-- FROM products 
+-- ORDER BY price DESC;
+
