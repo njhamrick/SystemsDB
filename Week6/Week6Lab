@@ -1,0 +1,16 @@
+-- PART A
+-- CREATE TABLE product(index bigserial, product_name varchar(100), description text, brand text, category text, price numeric, currency varchar (5), stock integer, EAN text, color varchar(30), size text, availability varchar(20), internal_ID bigserial);
+-- SELECT * FROM product;
+
+-- PART B
+-- SELECT price,stock,price*stock AS inventory_value
+-- FROM product;
+
+-- SELECT AVG(price) AS average_price
+-- FROM product;
+
+-- SELECT MIN(price), MAX(price)
+-- FROM product;
+
+-- SELECT COUNT(*)
+-- FROM product;
