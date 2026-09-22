@@ -1,0 +1,36 @@
+-- I USED PRODUCTS-10000 FROM THE LINK PROVIDED FOR THIS ASSIGNMENT
+-- PART A
+-- CREATE DATABASE PracticeMathDB;
+-- CREATE TABLE products(index bigserial, name text, description text, brand text, category text, price numeric, currency varchar(5), stock integer, ean text, color varchar (20), size varchar(30), availability varchar(15), internal_id bigserial);
+-- SELECT * FROM products LIMIT 5;
+
+-- SELECT SUM(price*stock) AS total_inventory
+-- FROM products;
+
+-- SELECT category, AVG(price) as average_price
+-- FROM products
+-- GROUP BY category;
+
+-- SELECT *
+-- FROM products
+-- WHERE price>500;
+
+-- SELECT COUNT(category)
+-- FROM products
+-- WHERE category='Makeup';
+
+-- SELECT name,category,price
+-- FROM products
+-- ORDER BY price;
+
+
+
+--PART B
+-- 1 new concept I noticed: I noticed the one-to-many relationship.
+-- This is when one item in one table can relate to multiple items in
+-- another table. For example, one player can play multiple positions, so
+-- this one player can be connected to multiple rows in the positions table
+
+
+-- 1 question I have: Does linking tables with JOIN and ON 
+-- combine the tables, or does it just pull data from each table?
