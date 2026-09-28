@@ -1,0 +1,187 @@
+-- Midterm Notes? Decision out by Wednesday
+
+
+--Crash Course:
+
+-- Create a table that stores information about video games
+CREATE TABLE games (
+    -- Automatically generates a unique ID for each game
+    game_id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    -- Stores the name of the game
+    title varchar(100) NOT NULL,
+
+    -- Stores the genre of the game
+    genre varchar(50),
+
+    -- Stores the price with 2 decimal places
+    price numeric(6,2)
+);
+
+
+-- Add three games to the games table
+INSERT INTO games (title, genre, price)
+VALUES
+    ('Elden Ring', 'RPG', 59.99),
+    ('Minecraft', 'Sandbox', 29.99),
+    ('Helldivers 2', 'Shooter', 39.99);
+-- Create a second table that stores game reviews
+
+-- Create a second table that stores game reviews
+CREATE TABLE reviews (
+   
+    review_id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+   
+    game_id integer REFERENCES games(game_id),
+	
+    score integer
+);
+
+-- Add reviews and connect them to games using game_id
+INSERT INTO reviews (game_id, score)
+VALUES
+    (1, 10), -- Elden Ring
+    (2, 9),  -- Minecraft
+    (1, 8);  -- Elden Ring
+
+
+--How are these two tables connected?
+--These are connected by games.game_id   <-----> reviews.game_id
+
+-Primary Key uniquely identifies row
+-- A Foreign Key references a row in another table
+
+--PK: identifies the record
+--FL: connects to that record
+
+
+--JOINS
+--Why do we use joins?
+--A JOIN allows our program to combine related information for us
+
+SELECT * from reviews
+
+
+
+
+--INNER JOIN gives rpws that have a match in both tables ---> only matching rows
+--SELECT the game title from games and the score from reviews
+SELECT games.title, reviews.score --References the table and its column  -----> tableName.columnName
+
+from games
+
+-- Connect the reviews table to the games table
+
+INNER JOIN reviews
+
+--Match rows where both tables have the same game_id
+ON games.game_id = reviews.game_id;
+-- ON games.game_id = reviews.game_id ---> tells Postgre HOW the 2 tables are related
+
+--Postgre essentially asks: Does this game_id match this game_id?
+
+
+--LEFT JOIN keeps everything from the left table + matches from the right table
+--select the game titles and its review score
+
+SELECT games.title, reviews.score
+
+from games
+LEFT JOIN reviews
+ON games.game_id = reviews.game_id;
+
+--Helldivers2 appears because it was pulled from the left table with LEFT JOIN, even though it was not a match, hence the null
+
+--Table ALIASES > Typing full table names gets annoying, so we create aliases for table names
+--Example: g is now games, r is now reviews
+--Select the title and the review score
+
+SELECT g.title, r.score
+
+--Give aliases
+FROM games AS g
+
+INNER JOIN reviews AS r
+
+ON g.game_id = r.game_id
+
+WHERE r.score >=9
+
+ORDER BY r.score;
+
+
+--JONS don't replace what we've learned, they allow us to use those skills across multiple tables
+
+
+
+CREATE TABLE students(student_id integer PRIMARY KEY, student_name varchar(100), major text);
+
+--integer ---> whole numbers
+--numeric ---> exact decimal
+--varchar ---> maximum length
+--text ---> no specified limit
+--date ---> dates
+--boolean ---> true/false
+
+
+INSERT INTO students(student_id,student_name,major)
+VALUES
+(1017085, "Nikki Hamrick ,"Cybersecurity and Programming"),
+(1684665,"Jason Hamrick","Data Migration")
+
+SELECT * FROM students;
+
+
+SELECT student_name, major
+FROM students;
+
+
+
+SELECT student_name, major
+FROM students
+WHERE major="Cybersecurity and Programming"
+and student_id=1017085;
+
+
+
+--ASC --> lowest to highest
+--DEC --> highest to lowest
+
+SELECT COUNT(*)
+from students;
+
+
+SELECT AVG(tuition_cost)
+FROM students;
+
+
+SELECT MAX(tuition_cost)
+FROM students;
+
+
+-- COUNT() --> Coutn
+-- SUM() --> Total
+-- AVG() --> AVG
+-- MIN() --> Smallest
+-- MAX() --> Largest
+
+
+UPDATE students
+
+SET major="networking"
+WHERE student_id=102;
+
+
+
+
+ALTER TABLE students
+
+ADD COLUMN tuition_cost numeric(10,2);
+
+
+
+-- MIDTERM
+--2 Parts: Quiz and Hands on (Lab)
+
+student_name varchar(100) NOT NULL;
