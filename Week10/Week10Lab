@@ -5,3 +5,16 @@ SELECT UPPER(category) FROM products;
 SELECT ROUND(price) FROM products;
 
 SELECT AGE('2026-10-19','2000-06-20');
+
+
+--PART3
+
+CREATE VIEW high_prices AS
+SELECT UPPER("Name"), LOWER(description), price
+FROM products
+WHERE price >200;
+
+
+--PART4
+
+SELECT* FROM high_prices;
