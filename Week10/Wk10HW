@@ -1,0 +1,47 @@
+-- Find the average price per category → ROUND() and CEIL().
+SELECT category,
+ROUND(AVG(price),2) AS avg_price,
+CEIL(AVG(price)) AS ceil_price
+FROM products
+GROUP BY category
+ORDER BY avg_price, ceil_price;
+
+
+-- Find the highest and lowest price using MAX() and MIN().
+SELECT MAX(price),MIN(price)
+FROM products
+
+
+-- Create a derived column FLOOR(price) to see price floored to whole numbers.
+FLOOR(price) AS floor_price
+FROM products
+
+
+-- Convert the category to uppercase using UPPER().
+SELECT UPPER(category)
+FROM products
+
+
+-- Create a view named category_overview that shows:
+-- Category, average price (rounded to 2 decimals), and total stock.
+-- Only include categories where average price > 50.
+-- Query your view to display results.
+
+CREATE VIEW category_overview AS
+select category,
+ROUND(AVG(price),2) AS avg_price,
+SUM(stock) AS total_stock
+FROM products
+GROUP BY category
+HAVING AVG(price) > 50;
+
+SELECT* FROM category_overview;
+
+
+
+
+
+
+
+
+
