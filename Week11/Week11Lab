@@ -1,0 +1,37 @@
+--PART A
+SELECT COUNT(*) AS total_records
+FROM products;
+
+-- There are 1000 records
+--More records can take longer to execute. Indexes CAN make it quicket, but SQL will determine what will be faster. Sometimes Seq Scan is quicker than Index scan
+
+
+--PART B
+EXPLAIN ANALYZE 
+SELECT * FROM products
+WHERE category='Skincare';
+
+--SQL used a Bitmap Index Scan
+-- Execution Time was 0.084 ms
+-- Heap Blocks: exact=20      Buffers: shared hit=21
+
+
+--PART C
+CREATE INDEX --this tells our database to build our index
+category_idx -- this is the name of our index (idx)
+--Everything after is what the index is being applied to
+ON products(category) --We're creating an index on the category column in the products table
+--Overall this query builds an index on the category column
+--SQL will use it automatically when it decides its faster than a full scan
+
+--PostgreSQL used a Bitmap Index scan
+--The execution time was slower than in PART B, 0.161 ms
+--PostgreSQL will automatically use an index, but ONLY if it will be faster than the sql/bitmap scan
+
+--PART D
+SET enable_seqscan=OFF;
+EXPLAIN ANALYZE
+SELECT * FROM products
+WHERE category='Skincare';
+--Yes, it reduced the execution time substantially compared to PART C, 0.093 ms
+--It is easier to search through normally with smaller databases, index makes it have to think more. Small tables dont benefit from Indexes
