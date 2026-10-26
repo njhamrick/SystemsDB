@@ -1,0 +1,45 @@
+--What is an index??
+--An index is like a table of contents for a database.
+--It helps SQL find rows faster without scanning the entire table.
+
+
+-- How to create a basic index?
+CREATE INDEX --this tells our database to build out index
+idx_category -- this is the name of our index (idx)
+--Everything after is what the index is being applied to
+ON products(category) --We're creating an index on the category column in the products table
+--Overall this query builds an index on the category column
+--SQL will use it automatically when it decides its faster than a full scan
+
+
+
+--Small tables don't benefit fro Indexes
+--When the entire table fits into memory, its faster for SQL to read all rows directly than perform multiple index lookups
+
+
+--indexes have lookup overhead
+--each index lookup adds extra work
+--PostgreSQL has to look for the index, then retrieve the rows, then piece them back together
+
+--SQL chooses  whatever is faster, this may result in having a SEQ scan rather than an index scan
+--indexes are extremely useful what the databases have thousands or millions of rows
+
+
+
+--Analyze query performance
+--Use EXPLAIN ANALYZE before an after creating the index
+EXPLAIN ANALYZE 
+SELECT * FROM products
+WHERE category='Skincare';
+
+--We use EXPLAIN ANALYZE to
+--See if your index is helping
+--If we see Seq Scan, SQL is scanning the whole table.
+--If we see Index Scan, its using the index we ade to locate matches faster
+
+
+--Forcing SQL to use INDEX SCAN
+SET enable_seqscan=OFF;
+EXPLAIN ANALYZE
+SELECT * FROM products
+WHERE category='Skincare';
