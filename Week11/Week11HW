@@ -1,0 +1,53 @@
+--1.
+CREATE TABLE products_big(index integer, "name" text, description text, brand varchar(100), category varchar(75), price numeric(10,2), currency varchar(5), stock integer, EAN text, color varchar(50), size varchar(25), availability text, internal_id integer);
+
+
+--3.
+SELECT COUNT(*) FROM products_big;
+SELECT * FROM products_big LIMIT 5;
+
+--4.
+EXPLAIN ANALYZE 
+SELECT * FROM products_big 
+WHERE category = 'Skincare';
+--Seq Scan 
+--rows removed by filter: 96981 
+--planning time: 0.149 ms
+--execution time: 49.457 ms
+
+--5.
+CREATE INDEX
+category_idx
+ON products_big(category);
+
+EXPLAIN ANALYZE 
+SELECT * FROM products_big 
+WHERE category = 'Skincare';
+
+--It switched to a Bitmap Index Scan. 
+--The planning time too longer: 5.558 ms. 
+--But the execution time was faster: 11.879 ms
+
+--6.
+CREATE INDEX idx_big_cat_price
+ON products_big(category, price);
+
+EXPLAIN ANALYZE 
+SELECT * FROM products_big 
+WHERE category = 'Skincare'
+AND price >100;
+--Bitmap Index Scan, planning time: 5.571 ms, execution time: 4.945 ms
+
+
+--7. 
+-- What changed between the “no index” and “with index” plans?
+
+-- When did PostgreSQL choose an index?
+
+-- How did the larger table size affect the optimizer compared to your smaller tables?
+
+--No index used a Seq Scan which took 49.457 ms to execute. With index, it switch to a Bitmap Index Scan, which reduced the 
+-- execution time to 11.879 ms. When I created the compound index, is was also a Bitmap Index Scan. Using the compund index with
+--a more selective query, the executed time was 4.945 ms. Because this table was a large table of 100000 records, we benefitted from 
+--using indexes because it was able to narrow down the results. 
+
