@@ -1,0 +1,54 @@
+-- CREATE TABLE creatures(
+-- creature_id serial PRIMARY KEY,
+-- creature_name varchar(50),
+-- creature_description text,
+-- "type" varchar(25)
+-- );
+
+-- CREATE TABLE creature_drops(
+-- drop_id serial PRIMARY KEY,
+-- creature_id int,
+-- creature_part varchar(50),
+-- part_description text,
+-- FOREIGN KEY (creature_id) REFERENCES creatures(creature_id)
+-- );
+
+-- INSERT INTO creatures(creature_name, creature_description, "type")
+-- VALUES
+-- ('Red Worker Ant', 'Can be found throughout the lower yard', 'neutral'),
+-- ('Ladybug', 'Can be seen wandering throughout the lower yard, can cause grass blades to move which can make you think there is a wolf spider close by. Makes cute sounds', 'neutral'),
+-- ('Wolf Spider', 'Big creature, venomous, sounds terrifying and can jump', 'hostile'),
+-- ('Aphid', 'tiny, can be seen running up blades of grass, will run away from you', 'harmless');
+
+-- INSERT INTO creature_drops(creature_id,creature_part, part_description)
+-- VALUES
+-- (1, 'Red Ant Head', 'Can ocassionally be found when you kill a rent ant worker'),
+-- (1, 'Red Ant Part', 'Found when you kill a red ant worker'),
+-- (2, 'Ladybug Part', 'Found when you kill a ladybug'),
+-- (2, 'Ladybug Head', 'Can ocassionally be found when you kill a ladybug'),
+-- (3, 'Spider Chunk', 'Found when you kill any type of spider'),
+-- (3, 'Spider Fang', 'Found when you kill a wolf spider'),
+-- (3, 'Spider Venom', 'Can occasionally be found when you kill a wolf spider'),
+-- (4, 'Raw Aphid Meat', 'Found when you kill an aphid, can be cooked for food'),
+-- (4, 'Aphid Honeydew', 'Can ocassionally be found when you kill and aphid, can be eaten as a snack or drink');
+
+-- SELECT
+-- creatures.creature_name,
+-- creatures.type,
+-- creature_drops.creature_part,
+-- creature_drops.part_description
+-- FROM creature_drops
+-- JOIN creatures
+-- ON creature_drops.creature_id=creatures.creature_id
+
+
+
+
+-- What type of relationship did you create (one-to-one or one-to-many)?
+-- I created a 1:M, each creature can have multiple drops
+
+-- What would happen if you deleted a department that still has employees?
+-- the FK constraint prevents orphan records
+
+-- Why is a foreign key important for data integrity?
+--It prevents records from not having any data. You cant create an order for a non-existent customer
