@@ -1,0 +1,67 @@
+--Review
+--Why primary and foreign keys matter
+--In a relational database, data lives in multiple tables, but those tables must be connected somehow
+--We do this using keys
+
+--Primary Key(PK): a column or set of columns taht uniquely identify a row in a table
+--> student_id, customer_id, product_id
+
+--Foreign Key(FK): a column in one table that refers  to a k in another table
+--An fk is just a pk in another table
+
+--Think of PK/FK like a parent-child relationship - a parent can have many childen,
+--but each child points to one parent 
+
+--Creating the parent table (customers)
+-- create table customers(
+-- customer_id serial PRIMARY KEY,
+-- name text,
+-- email text,
+-- city text);
+
+--Serial automatically numbers each new record
+--PK ensures each id is unique and not null
+
+--Creating the child table (Orders)
+-- create table orders(
+-- id serial PRIMARY KEY,
+-- customer_id int,
+-- product text,
+-- total numeric(10,2),
+-- FOREIGN KEY(customer_id) REFERENCES customers(customer_id)
+-- )
+
+
+--customer_id linked each order back to a customer
+-- the FK constraint prevents orphan records
+--You cant create an order for a non-existent customer
+
+--Inserting sample data
+-- INSERT INTO customers("name", email, city)
+-- VALUES
+-- ('Alice', 'alice@email.com', 'Boise'),
+-- ('Brian', 'brian@email.com', 'Twin Falls'),
+-- ('Carmen', 'carmen@email.com', 'Jerome');
+
+-- INSERT INTO orders(customer_id, product, total)
+-- VALUES
+-- (1, 'Laptop', 999.99),
+-- (1, 'Mouse', 25.50),
+-- (2, 'Headphones', 89.99),
+-- (3, 'Monitor', 199.99);
+
+--Each order's customer ID points to an existing customer in customers
+
+--Join the tables
+-- SELECT 
+-- customers.name, --selecting name column from customers
+-- customers.city,
+-- orders.product,
+-- orders.total
+-- FROM orders
+-- JOIN customers --join default to inner join, only rows matching customers will appear
+-- ON orders.customer_id=customers.customer_id
+
+--PK uniquely identifies rows
+--FK links tables together
+--Many relationship types(1:1, 1:M, M:M)
